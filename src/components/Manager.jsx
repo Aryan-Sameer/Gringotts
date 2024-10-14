@@ -98,8 +98,8 @@ const Manager = () => {
     <main className='flex flex-col md:items-center m-5 gap-2'>
 
       <div className="absolute top-0 z-[-2] h-screen w-fit bg-white bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-      <section className="inputField flex flex-col gap-3 bg-slate-400 lg:w-1/2 p-4 rounded-xl">
-        <h2 className='text-center text-xl'>Save Password</h2>
+      <section className="inputField flex flex-col gap-3 bg-slate-400 xl:w-1/2 md:w-2/3 p-4 rounded-xl">
+        {/* <h2 className='text-center text-xl'>Save Password</h2> */}
         <input onChange={handleChange} value={form.site} name='site' className='focus:outline-none p-1 border-2 text-slate-500 border-slate-500 rounded-xl' type="text" placeholder='Enter the URL' />
         <div className='flex gap-3 flex-col relative md:flex-row'>
           <input onChange={handleChange} value={form.userName} name='userName' className='focus:outline-none p-1 md:w-[60%] w-full border-2 text-slate-500 border-slate-500 rounded-xl' type="text" placeholder='Unsename / email' />
@@ -145,7 +145,7 @@ const Manager = () => {
       <ToastContainer />
 
       <h2 className='font-bold text-2xl text-slate-700 text-center '>Your passwords</h2>
-      <section className='content w-full flex flex-col xl:items-center gap-3 overflow-auto'>
+      <section className='content w-full flex flex-col gap-3 overflow-auto'>
         {passwordArray.length === 0 ? <p className='font-bold text-slate-500 text-center'>You have not saved any passwords!</p> :
           <table className="table-auto text-center rounded-lg overflow-hidden">
             <thead>
@@ -179,7 +179,7 @@ const Manager = () => {
                       </lord-icon></span></p>
                     </td>
                     <td>
-                      <p className='flex justify-center items-center gap-2 py-1 px-3'>{item.password} <span onClick={() => { copyText(item.password) }} className='cursor-pointer align-middle'><lord-icon
+                      <p className='flex justify-center items-center gap-2 py-1 px-3'>{"*".repeat(item.password.length)} <span onClick={() => { copyText(item.password) }} className='cursor-pointer align-middle'><lord-icon
                         src="https://cdn.lordicon.com/xpgofwru.json"
                         trigger="hover"
                         state="hover-file-2"
