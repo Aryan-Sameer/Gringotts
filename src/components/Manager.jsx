@@ -11,7 +11,6 @@ const Manager = () => {
   const [showPass, setShowPass] = useState(false)
   const [form, setForm] = useState({ site: "", userName: "", password: "" })
   const [passwordArray, setPasswordArray] = useState([])
-  const [urlArray, setUrlArray] = useState([])
   const passwordRef = useRef()
 
   useEffect(() => {
@@ -99,7 +98,6 @@ const Manager = () => {
 
       <div className="absolute top-0 z-[-2] h-screen w-fit bg-white bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
       <section className="inputField flex flex-col gap-3 bg-slate-400 xl:w-1/2 md:w-2/3 p-4 rounded-xl">
-        {/* <h2 className='text-center text-xl'>Save Password</h2> */}
         <input onChange={handleChange} value={form.site} name='site' className='focus:outline-none p-1 border-2 text-slate-500 border-slate-500 rounded-xl' type="text" placeholder='Enter the URL' />
         <div className='flex gap-3 flex-col relative md:flex-row'>
           <input onChange={handleChange} value={form.userName} name='userName' className='focus:outline-none p-1 md:w-[60%] w-full border-2 text-slate-500 border-slate-500 rounded-xl' type="text" placeholder='Unsename / email' />
@@ -114,20 +112,6 @@ const Manager = () => {
             style={{ width: "18px" }}>
           </lord-icon>
           <p className='text-md'>Save</p></button>
-
-        {/* <hr className='border border-slate-500' />
-
-        <h2 className='text-center text-xl'>Save URLs</h2>
-        <input name='url' className='focus:outline-none p-1 border-2 text-slate-500 border-slate-500 rounded-xl' type="text" placeholder='Enter the URL to save' />
-        <input name='desc' className='focus:outline-none p-1 border-2 text-slate-500 border-slate-500 rounded-xl' type="text" placeholder='Enter description' />
-        <button className='md:w-min w-full px-4 bg-slate-600 text-white rounded-xl flex items-center justify-center gap-1 hover:bg-slate-700'>
-          <lord-icon
-            src="https://cdn.lordicon.com/jgnvfzqg.json"
-            trigger="hover"
-            colors="primary:#ffffff"
-            style={{ width: "18px" }}>
-          </lord-icon>
-          <p className='text-md'>Save</p></button> */}
       </section>
 
       <ToastContainer
@@ -209,45 +193,7 @@ const Manager = () => {
             </tbody>
           </table>}
       </section>
-
-      {/* <hr className='border border-slate-500 md:w-2/3 w-full my-3 mx-auto' />
-
-      <section>
-        <h2 className='font-bold text-2xl text-slate-700 text-center'>Your URLs</h2>
-        {
-          urlArray.length == 0 ? <p className='font-bold text-slate-500 text-center'>You have not saved any URLs!</p> :
-
-            <table className="table-auto text-center rounded-lg overflow-hidden">
-              <thead>
-                <tr className='bg-slate-400'>
-                  <th className='p-2'>Site URL</th>
-                  <th className='p-2'>User name</th>
-                </tr>
-              </thead>
-              <tbody className='bg-slate-200'>
-                <tr className='border border-y-white'>
-                  <td className='flex justify-center items-center gap-2 py-1 px-3'>
-                    <span onClick={() => { copyText(item.site) }} className='cursor-pointer'>
-                      <lord-icon
-                        src="https://cdn.lordicon.com/xpgofwru.json"
-                        trigger="hover"
-                        state="hover-file-2"
-                        style={{ width: "18px", display: "inline-block", verticalAlign: "middle" }}>
-                      </lord-icon></span>
-                  </td>
-                  <td>
-                    <p className='flex justify-center items-center gap-2 py-1 px-3'> <span className='cursor-pointer align-middle'><lord-icon
-                      src="https://cdn.lordicon.com/xpgofwru.json"
-                      trigger="hover"
-                      state="hover-file-2"
-                      style={{ width: "18px", display: "inline-block", verticalAlign: "middle" }}>
-                    </lord-icon></span></p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-        }
-      </section> */}
+      
     </main>
   )
 }
