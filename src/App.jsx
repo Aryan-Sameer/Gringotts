@@ -31,7 +31,7 @@ function App() {
   ])
 
   return (
-    <div className="font-mono flex flex-col h-[100vh]">
+    <div className="font-mono flex flex-col h-[100svh]">
       <Navbar user={user} />
       <RouterProvider router={router} />
       <Footer />
