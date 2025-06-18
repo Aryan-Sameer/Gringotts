@@ -33,7 +33,7 @@ const Navbar = (props) => {
       {props.user ?
         <div className='flex flex-col'>
           <button
-            title='Account'
+            title={props.user.displayName}
             className='bg-slate-600 text-white rounded-xl'
             onClick={() => setOpenDropdown(!openDropdown)} >
             <FaUserCircle className='size-6 sm:size-8' />

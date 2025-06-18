@@ -15,6 +15,7 @@ import {
   deleteDoc,
   doc
 } from 'firebase/firestore';
+
 import Toast from '../components/Toast';
 
 const Manager = (props) => {
@@ -22,6 +23,7 @@ const Manager = (props) => {
   const [showPass, setShowPass] = useState(false)
   const [form, setForm] = useState({ site: "", userName: "", password: "" })
   const [passwordArray, setPasswordArray] = useState([])
+  const [isLoading, setisLoading] = useState(false)
   const passwordRef = useRef()
 
   const dataCollection = collection(database, "passwords")
@@ -59,6 +61,7 @@ const Manager = (props) => {
   }
 
   const createPassword = async () => {
+    setisLoading(true)
     try {
       if ((form.site != "" && form.userName != "" && form.password != "")) {
         await addDoc(dataCollection, {
@@ -68,11 +71,14 @@ const Manager = (props) => {
           password: form.password,
         })
         setForm({ site: "", userName: "", password: "" })
+        toast("Password saved successfully")
       } else {
         toast("Fill all the fieds")
       }
     } catch (error) {
       toast(error.message)
+    } finally {
+      setisLoading(false)
     }
   }
 
@@ -126,14 +132,17 @@ const Manager = (props) => {
             <input onChange={handleChange} ref={passwordRef} value={form.password} name='password' className='focus:outline-none p-1 md:w-[40%] w-full border-2 text-slate-500 border-slate-500 rounded-xl relative' type="password" placeholder='Enter Password' />
             <span onClick={toggleEye} className='absolute right-2 md:top-[50%] md:translate-y-[-50%] top-[75%] translate-y-[-25%] cursor-pointer'>{showPass ? <FaEye /> : <FaEyeSlash />}</span>
           </div>
-          <button onClick={createPassword} className='md:w-min w-full px-4 bg-slate-600 text-white rounded-xl flex items-center justify-center gap-1 hover:bg-slate-700'>
+          <button
+            onClick={createPassword}
+            disabled = {isLoading}
+            className='md:w-min w-full px-4 bg-slate-600 text-white rounded-xl flex items-center justify-center gap-1 hover:bg-slate-700'>
             <lord-icon
               src="https://cdn.lordicon.com/jgnvfzqg.json"
               trigger="hover"
               colors="primary:#ffffff"
               style={{ width: "18px" }}>
             </lord-icon>
-            <p className='text-md select-none'>Save</p></button>
+            <p className='text-md select-none'>{isLoading ? "Saving..." : "Save"}</p></button>
         </section>
 
         <Toast />

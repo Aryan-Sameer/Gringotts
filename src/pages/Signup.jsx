@@ -95,6 +95,8 @@ const Signup = () => {
 
         <h1 className='text-lg'>{accoutnExists ? `Login to ` : `Create `} your account</h1>
 
+        <hr />
+
         {!accoutnExists ? <input
           onChange={(e) => handlChange(e)}
           name='userName'
@@ -137,13 +139,13 @@ const Signup = () => {
 
         <button
           onClick={(event) => handleGoogleAuth(event)}
-          className='w-full p-2 bg-slate-600 text-white rounded-xl flex items-center justify-center gap-1 hover:bg-slate-700'>
+          className='w-full p-2 bg-slate-600 text-white rounded-xl flex items-center justify-center gap-1 select-none hover:bg-slate-700'>
           <lord-icon
             src="https://cdn.lordicon.com/wstfgfud.json"
             trigger="hover"
             state="hover-draw">
           </lord-icon>
-          <p className='text-md'>Signin with Google</p>
+          <p className='text-md'>Continue with Google</p>
         </button>
 
         <small
