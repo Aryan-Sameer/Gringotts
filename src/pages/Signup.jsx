@@ -91,7 +91,7 @@ const Signup = () => {
 
   return (
     <div className='flex flex-col items-center justify-center flex-grow'>
-      <form className='flex gap-3 flex-col relative sm:w-2/3 md:w-1/2 lg:w-1/4 w-3/4 border-2 rounded-xl border-slate-500 p-4'>
+      <form className='flex gap-3 flex-col relative sm:w-2/3 md:w-1/2 lg:w-1/4 border-2 rounded-xl border-slate-500 p-4'>
 
         <h1 className='text-lg'>{accoutnExists ? `Login to ` : `Create `} your account</h1>
 
