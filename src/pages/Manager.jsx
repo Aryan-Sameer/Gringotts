@@ -120,6 +120,17 @@ const Manager = (props) => {
     }
   }
 
+  const exportCSV = () => {
+    const headers = "Site,Email / User Name,Password\n";
+    const rows = passwordArray.map(p => `${p.site},${p.userName},${p.password}`).join("\n");
+    const blob = new Blob([headers + rows], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'passwords.csv';
+    a.click();
+  };
+
   return (
     <main>
       <div className='flex flex-col md:items-center m-5 gap-2'>
@@ -132,17 +143,32 @@ const Manager = (props) => {
             <input onChange={handleChange} ref={passwordRef} value={form.password} name='password' className='focus:outline-none p-1 md:w-[40%] w-full border-2 text-slate-500 border-slate-500 rounded-xl relative' type="password" placeholder='Enter Password' />
             <span onClick={toggleEye} className='absolute right-2 md:top-[50%] md:translate-y-[-50%] top-[75%] translate-y-[-25%] cursor-pointer'>{showPass ? <FaEye /> : <FaEyeSlash />}</span>
           </div>
-          <button
-            onClick={createPassword}
-            disabled = {isLoading}
-            className='md:w-min w-full px-4 bg-slate-600 text-white rounded-xl flex items-center justify-center gap-1 hover:bg-slate-700'>
-            <lord-icon
-              src="https://cdn.lordicon.com/jgnvfzqg.json"
-              trigger="hover"
-              colors="primary:#ffffff"
-              style={{ width: "18px" }}>
-            </lord-icon>
-            <p className='text-md select-none'>{isLoading ? "Saving..." : "Save"}</p></button>
+
+          <div className='flex gap-2'>
+            <button
+              onClick={createPassword}
+              disabled={isLoading}
+              className='md:w-min w-full px-4 bg-slate-600 text-white rounded-xl flex items-center justify-center gap-1 hover:bg-slate-700'>
+              <lord-icon
+                src="https://cdn.lordicon.com/jgnvfzqg.json"
+                trigger="hover"
+                colors="primary:#ffffff"
+                style={{ width: "18px" }}>
+              </lord-icon>
+              <p className='text-md select-none'>{isLoading ? "Saving..." : "Save"}</p></button>
+
+            <button
+              onClick={exportCSV}
+              disabled={isLoading}
+              className='md:w-min w-full px-4 bg-slate-600 text-white rounded-xl flex items-center justify-center gap-1 hover:bg-slate-700'>
+              <lord-icon
+                src="https://cdn.lordicon.com/ucfjvctd.json"
+                trigger="hover"
+                colors="primary:#ffffff,secondary:#ffffff"
+                style={{ width: "18px" }}>
+              </lord-icon>
+              <p className='text-md select-none'>Export</p></button>
+          </div>
         </section>
 
         <Toast />
