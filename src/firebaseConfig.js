@@ -5,13 +5,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB1_UTaumsgko1BuA1icg3EY9rvaxvNgoE",
-  authDomain: "gringotts-bb246.firebaseapp.com",
-  projectId: "gringotts-bb246",
-  storageBucket: "gringotts-bb246.firebasestorage.app",
-  messagingSenderId: "1024975783242",
-  appId: "1:1024975783242:web:29e715afdb6bdb7c00edb3",
-  measurementId: "G-N012CJG7L8"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
 };
 
 // Initialize Firebase
