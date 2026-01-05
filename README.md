@@ -127,6 +127,7 @@ cd password-manager
 
 ```bash
 npm install
+npm install firebase
 ```
 
 ### 3️⃣ Configure Firebase
