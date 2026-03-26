@@ -127,6 +127,7 @@ cd password-manager
 
 ```bash
 npm install
+npm install firebase
 ```
 
 ### 3️⃣ Configure Firebase
@@ -145,6 +146,7 @@ const firebaseConfig = {
   storageBucket: "YOUR_STORAGE_BUCKET",
   messagingSenderId: "YOUR_SENDER_ID",
   appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
 };
 
 const app = initializeApp(firebaseConfig);
