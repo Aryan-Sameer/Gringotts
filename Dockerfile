@@ -2,7 +2,7 @@
 FROM node:20-alpine AS base
 
 # stage 1
-FROM base as builder
+FROM base AS builder
 WORKDIR /home/build
 
 COPY package*.json ./
@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2
-FROM nginx:alpine as runner
+FROM nginx:alpine AS runner
 
 WORKDIR /home/app
 
