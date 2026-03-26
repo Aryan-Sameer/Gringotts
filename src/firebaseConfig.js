@@ -5,13 +5,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB1_UTaumsgko1BuA1icg3EY9rvaxvNgoE",
-  authDomain: "gringotts-bb246.firebaseapp.com",
-  projectId: "gringotts-bb246",
-  storageBucket: "gringotts-bb246.firebasestorage.app",
-  messagingSenderId: "1024975783242",
-  appId: "1:1024975783242:web:29e715afdb6bdb7c00edb3",
-  measurementId: "G-N012CJG7L8"
+  apiKey: import.meta.env.API_KEY,
+  authDomain: import.meta.env.AUTH_DOMAIN,
+  projectId: import.meta.env.PROJECT_ID,
+  storageBucket: import.meta.env.STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.MESSAGING_SENDER_ID,
+  appId: import.meta.env.APP_ID,
+  measurementId: import.meta.env.MEASUREMENT_ID
 };
 
 // Initialize Firebase
