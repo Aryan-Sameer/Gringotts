@@ -26,7 +26,7 @@ phases:
       - echo Build completed on `date`
       - docker push 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"api-task ","imageUri":"%s"}]' 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest > imagedefinitions.json
+      - printf '[{"name":"api-task","imageUri":"%s"}]' 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest > imagedefinitions.json
 
 artifacts:
   files:
