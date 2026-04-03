@@ -1,33 +1,59 @@
+# version: 0.2
+
+# env:
+#   variables:
+#     AWS_DEFAULT_REGION: ap-south-2
+#     IMAGE_REPO_NAME: gringotts
+#     IMAGE_TAG: latest
+
+# phases:
+#   pre_build:
+#     commands:
+#       - echo Logging in to Amazon ECR...
+#       - aws --version
+#       - ACCOUNT_ID=184244027379
+#       - REPOSITORY_URI=184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts
+#       - aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 184244027379.dkr.ecr.ap-south-2.amazonaws.com
+
+#   build:
+#     commands:
+#       - echo Build started on `date`
+#       - docker build -t gringotts .
+#       - docker tag gringotts:latest 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest
+
+#   post_build:
+#     commands:
+#       - echo Build completed on `date`
+#       - docker push 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest
+#       - echo Writing image definitions file...
+#       - printf '[{"name":"api-task","imageUri":"%s"}]' 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest > imagedefinitions.json
+
+# artifacts:
+#   files:
+#     - imagedefinitions.json
+
 version: 0.2
-
-env:
-  variables:
-    AWS_DEFAULT_REGION: ap-south-2
-    IMAGE_REPO_NAME: gringotts
-    IMAGE_TAG: latest
-
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws --version
-      - ACCOUNT_ID=184244027379
-      - REPOSITORY_URI=184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts
       - aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 184244027379.dkr.ecr.ap-south-2.amazonaws.com
-
+      - REPOSITORY_URI=184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
-      - docker build -t gringotts .
-      - docker tag gringotts:latest 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest
-
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
-      - docker push 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"api-task","imageUri":"%s"}]' 184244027379.dkr.ecr.ap-south-2.amazonaws.com/gringotts:latest > imagedefinitions.json
-
+      - printf '[{"name":"api-task","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
-  files:
-    - imagedefinitions.json
+  files: imagedefinitions.json
